@@ -2,15 +2,13 @@
 #include "esp_err.h"
 #include "nvs_flash.h"
 #include "esp_log.h"
-
-// Include function declarations from other modules
-#include "wifi_ap.h"      // Wi-Fi SoftAP
-#include "sd_card.h"   // SD Card Initialization
-#include "websocket.h"       // WebSocket Server
-#include "http_post.h"          // HTTP POST Server
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+#include "wifi_ap.h"
+#include "sd_card.h"
+#include "websocket.h"
+#include "http_post.h"
 
 static const char *TAG = "artbot_main";
 
@@ -39,6 +37,16 @@ void app_main(void) {
     }
 }
 
+void sd_card_task(void *pvParameters) {
+    ESP_LOGI("SD_CARD_TASK", "Initializing SD Card...");
+    esp_err_t ret = sd_card_initialize();
+    if (ret != ESP_OK) {
+        ESP_LOGE("SD_CARD_TASK", "SD Card initialization failed!");
+    } else {
+        ESP_LOGI("SD_CARD_TASK", "SD Card initialized successfully");
+    }
+    vTaskDelete(NULL);  // Delete task after completion
+}
 
 void websocket_task(void *pvParameters) {
     ESP_LOGI("WEBSOCKET_TASK", "Starting Unified HTTP Server...");
@@ -58,13 +66,3 @@ void websocket_task(void *pvParameters) {
     }
 }
 
-void sd_card_task(void *pvParameters) {
-    ESP_LOGI("SD_CARD_TASK", "Initializing SD Card...");
-    esp_err_t ret = sd_card_initialize();
-    if (ret != ESP_OK) {
-        ESP_LOGE("SD_CARD_TASK", "SD Card initialization failed!");
-    } else {
-        ESP_LOGI("SD_CARD_TASK", "SD Card initialized successfully");
-    }
-    vTaskDelete(NULL);  // Delete task after completion
-}
