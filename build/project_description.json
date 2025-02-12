@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "ESP32_Artbot",
-    "project_version":    "1",
+    "project_version":    "b406de1-dirty",
     "project_path":       "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot",
     "idf_path":           "C:/Users/NickA/esp/v5.3.1/esp-idf",
     "build_dir":          "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/build",
@@ -880,7 +880,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [ "protocol_examples_common" ],
             "file": "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/build/esp-idf/main/libmain.a",
-            "sources": [ "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/wifi_ap.c", "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/sd_card.c", "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/artbot_main.c", "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/http_post.c", "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/websocket.c" ],
+            "sources": [ "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/http_post.c", "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/http_post_original.c", "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/wifi_ap.c", "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/sd_card.c", "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/artbot_main.c", "D:/Self/Code/EEDesign/ESP/S3/S3_Artbot_Main/ESP32_Artbot/main/websocket.c" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {

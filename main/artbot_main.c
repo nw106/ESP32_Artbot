@@ -12,31 +12,6 @@
 
 static const char *TAG = "artbot_main";
 
-void app_main(void) {
-    esp_err_t ret;
-
-    //initialize nvs flash
-    ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-        ESP_ERROR_CHECK(nvs_flash_erase());
-        ret = nvs_flash_init();
-    }
-    ESP_ERROR_CHECK(ret);
-    ESP_LOGI(TAG, "NVS initialized successfully");
-
-    //Initialize Wifi AP
-    ESP_LOGI(TAG, "Initializing Wi-Fi AP");
-    wifi_init_softap();
-
-    // Create FreeRTOS tasks
-    xTaskCreate(websocket_task, "WebSocket Task", 4096, NULL, 5, NULL);
-    xTaskCreate(sd_card_task, "SD Card Task", 4096, NULL, 5, NULL);
-
-    while (1) {
-        vTaskDelay(pdMS_TO_TICKS(1000));  // Keeps the main function running
-    }
-}
-
 void sd_card_task(void *pvParameters) {
     ESP_LOGI("SD_CARD_TASK", "Initializing SD Card...");
     esp_err_t ret = sd_card_initialize();
@@ -66,3 +41,27 @@ void websocket_task(void *pvParameters) {
     }
 }
 
+void app_main(void) {
+    esp_err_t ret;
+
+    //initialize nvs flash
+    ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+    ESP_LOGI(TAG, "NVS initialized successfully");
+
+    //Initialize Wifi AP
+    ESP_LOGI(TAG, "Initializing Wi-Fi AP");
+    wifi_init_softap();
+
+    // Create FreeRTOS tasks
+    xTaskCreate(websocket_task, "WebSocket Task", 4096, NULL, 5, NULL);
+    xTaskCreate(sd_card_task, "SD Card Task", 4096, NULL, 5, NULL);
+
+    while (1) {
+        vTaskDelay(pdMS_TO_TICKS(1000));  // Keeps the main function running
+    }
+}
